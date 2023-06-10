@@ -1,0 +1,38 @@
+﻿@model _2FAuthentication.Models.Login;
+@{
+    Layout = null;
+}
+
+<h2>Login</h2>
+
+@if(ViewBag.Status ==null || !ViewBag.Status){
+    <form asp-action="Login">
+        <div>
+            <label for="Username"> Username : </label>
+            <input type="text" asp-for="Username" />
+        </div>
+        <div>
+            <label for="Username"> Password : </label>
+            <input type="password" asp-for="Password" />
+        </div>
+        <div>
+            <input type="submit" Value="Loging" class="btn btn-primary"/>
+        </div>
+    </form>
+}else{
+    <div>@ViewBag.Message</div>
+
+    <div>
+        <img src="@ViewBag.BarcodeImageUrl" width="300" height="300" />
+    </div>
+    <div>
+        Manual Setup Code : @ViewBag.SetupCode
+    </div>
+    <div>
+        <form asp-action="Verify2FA" asp-controller="Home" method="post">
+            <input type="text" name="passcode"/>
+            <input type="submit"  class="btn btn-primary" />
+        </form>
+        
+    </div>
+}
